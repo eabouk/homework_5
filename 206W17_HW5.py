@@ -34,27 +34,6 @@ import twitter_info
 ## Because it is dependent on user input, there are no unit tests for this -- we will run your assignments in a batch to grade them!
 
 ## We've provided some starter code below, like what is in the class tweepy examples.
-
-CACHED_FILE = "twitter_cache.json"
-
-try:
-	cached_file_obj = open(CACHED_FILE, "r")
-	contents_of_CF = cached_file_obj.read()
-	cached_dict = json.loads(contents_of_CF)
-except:
-	CACHED_DICTION = {}
-
-
-## **** For 50 points of extra credit, create another file called twitter_info.py that contains your consumer_key, consumer_secret, 
-##access_token, and access_token_secret, import that file here, and use the process we discuss in class to make that information 
-##secure! Do NOT add and commit that file to a public GitHub repository.
-
-## **** If you choose not to do that, we strongly advise using authentication information for an 'extra' Twitter account you 
-##make just for this class, and not your personal account, because it's not ideal to share your authentication information 
-##for a real account that you use frequently.
-
-## Get your secret values to authenticate to Twitter. You may replace each of these with variables rather than filling in the empty 
-#strings if you choose to do the secure way for 50 EC points
 consumer_key = twitter_info.consumer_key
 consumer_secret = twitter_info.consumer_secret
 access_token = twitter_info.access_token
@@ -66,6 +45,34 @@ auth.set_access_token(access_token, access_token_secret)
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, parser=tweepy.parsers.JSONParser()) 
+
+CACHED_FILE = "twitter_cache.json"
+
+try:
+	cached_file_obj = open(CACHED_FILE, "r")
+	contents_of_CF = cached_file_obj.read()
+	cached_dict = json.loads(contents_of_CF)
+except:
+	CACHED_DICTION = {}
+
+def get_tweets_containing():
+	tweet = input('Type here to find tweets that contain:')
+	tweets_containing = api.search(tweet)
+	print(tweets_containing)
+
+get_tweets_containing()
+
+## **** For 50 points of extra credit, create another file called twitter_info.py that contains your consumer_key, consumer_secret, 
+##access_token, and access_token_secret, import that file here, and use the process we discuss in class to make that information 
+##secure! Do NOT add and commit that file to a public GitHub repository.
+
+## **** If you choose not to do that, we strongly advise using authentication information for an 'extra' Twitter account you 
+##make just for this class, and not your personal account, because it's not ideal to share your authentication information 
+##for a real account that you use frequently.
+
+## Get your secret values to authenticate to Twitter. You may replace each of these with variables rather than filling in the empty 
+#strings if you choose to do the secure way for 50 EC points
+
 #Set up library to grab stuff from twitter with your authentication, and return it in a JSON-formatted way
 
 ## Write the rest of your code here!
