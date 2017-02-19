@@ -57,8 +57,15 @@ except:
 
 def get_tweets_containing():
 	tweet = input('Type here to find tweets that contain:')
-	tweets_containing = api.search(tweet)
-	print(tweets_containing)
+	tweets_containing = api.search(q = tweet,lang = "en", rpp =3)
+	print (type(tweets_containing))
+
+	for keys in tweets_containing["statuses"]:
+		print("PRINTING TWEET", keys["text"])
+		#print(tweets_containing["statuses"])
+		#print("PRINTING TWEET", tweets_containing)
+	
+	
 
 get_tweets_containing()
 
