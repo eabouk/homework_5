@@ -56,16 +56,29 @@ except:
 	CACHED_DICTION = {}
 
 def get_tweets_containing():
+	CACHED_DICTION = {}
 	tweet = input('Type here to find tweets that contain:')
 	tweets_containing = api.search(q = tweet,lang = "en", rpp =3)
 	print (type(tweets_containing))
 
-	for keys in tweets_containing["statuses"]:
-		print("PRINTING TWEET", keys["text"])
-		#print(tweets_containing["statuses"])
-		#print("PRINTING TWEET", tweets_containing)
-	
-	
+	if tweet not in CACHED_DICTION:
+		for keys in tweets_containing["statuses"]:
+			CACHED_DICTION[tweet] = tweets_containing["statuses"]
+			f = open(CACHED_FILE, 'w')
+			f.write(json.dumps(CACHED_DICTION[tweet]))
+			f.close()
+	else:
+		print("printing tweet data for:", tweet)
+
+	final_list = []
+	i = 0
+	for tweets_containing["statuses"] in range(3):
+		final_list.append(keys["text"])
+		print("TEXT:",keys["text"])
+		print ("CREATED AT:", keys["created_at"])
+		
+	return final_list
+
 
 get_tweets_containing()
 
